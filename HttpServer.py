@@ -62,7 +62,7 @@ class HttpServer(QThread):
         handler.set_text_signaller(handler, signal_function=self.request_text_change)
         handler.set_client_signaller(handler, signal_function=self.client_text_change)
         handler.set_response_signaller(handler, signal_function=self.response_text_change)
-        handler.cgi_directories = ['/API', ]
+        handler.cgi_directories = ['/api', ]
         httpd = HTTPServer(("localhost", 8000), handler)
         print("serving at port", 8000)
         httpd.serve_forever()

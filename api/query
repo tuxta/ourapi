@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+
+import cgi
+import cgitb
+
+from configparser import ConfigParser
+
+from random import randint
+import json
+cgitb.enable()
+
+form = cgi.FieldStorage()
+args = form.keys()
+function_call = form.getvalue('function')
+
+definitions_parser = ConfigParser()
+definitions_parser.read('definitions.ini')
+
+if definitions_parser.has_section(function_call):
+    print("WORKING A TREAT")
+else:
+    print("NO GO ON THE FUNCTION NAME")
+
+function_args = definitions_parser.get(function_call, 'args').split(',')
+
+print(f"Function name: {function_call}")
+print(f"Args for function in ini file : {function_args}")
+print(f"Args provided in browser : {args}")
+
+for name in function_args:
+    if name not in args:
+        print("No go on the ARGS oh")
+        break
+else:
+    print("Correct args provided")
+
+ran_num = randint(1, 10)
+
+data = {'data':
+        [
+              {
+                    'name': 'Harry',
+                    'age': 24,
+                    'sex': 'Male'
+              },
+              {
+                    'name': 'Sally',
+                    'age': 22,
+                    'sex': 'Female'
+              }
+        ],
+        'Random': ran_num
+        }
+
+return_json = json.dumps(data)
+print(return_json)
+# print(json.dumps(data))
+print("""
+<html>
+  <head>
+      <title>Our api</title>
+  </head>
+  <body>
+    <p style="font-weight:bold; text-align:center;">
+      Our api - now dynamic :-)
+    </p>
+    <p style="text-align:center">
+      Our random number is: {}
+    </p>
+  </body>
+</html>
+""".format(ran_num)
+      )

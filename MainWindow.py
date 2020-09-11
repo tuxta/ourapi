@@ -9,7 +9,7 @@ class MainWindow(QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowTitle('Our API')
+        self.setWindowTitle('Our api')
 
         self.httpd = HttpServer()
         self.httpd.request_text_change.connect(self.add_to_request)
@@ -19,10 +19,10 @@ class MainWindow(QMainWindow):
 
     def add_to_request(self, request_text):
         request_type, request_string = request_text.split(',')
-        self.ui.requestText.setText(self.ui.requestText.toPlainText() + '\n' + request_string)
+        self.ui.requestText.setText(request_string)
 
     def add_to_client(self, client_text):
-        self.ui.clientText.setText(self.ui.clientText.toPlainText() + '\n' + client_text)
+        self.ui.clientText.setText(client_text)
 
     def add_to_response(self, response_text):
-        self.ui.responseText.setText(self.ui.responseText.toPlainText() + '\n' + response_text)
+        self.ui.responseText.setText(response_text)
