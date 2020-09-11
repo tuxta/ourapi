@@ -12,8 +12,17 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Our API')
 
         self.httpd = HttpServer()
-        self.httpd.request_text_change.connect(self.add_to_text)
+        self.httpd.request_text_change.connect(self.add_to_request)
+        self.httpd.client_text_change.connect(self.add_to_client)
+        self.httpd.response_text_change.connect(self.add_to_response)
         self.httpd.start()
 
-    def add_to_text(self, new_text):
-        self.ui.textEdit.setText(self.ui.textEdit.toPlainText() + '\n' + new_text)
+    def add_to_request(self, request_text):
+        request_type, request_string = request_text.split(',')
+        self.ui.requestText.setText(self.ui.requestText.toPlainText() + '\n' + request_string)
+
+    def add_to_client(self, client_text):
+        self.ui.clientText.setText(self.ui.clientText.toPlainText() + '\n' + client_text)
+
+    def add_to_response(self, response_text):
+        self.ui.responseText.setText(self.ui.responseText.toPlainText() + '\n' + response_text)
