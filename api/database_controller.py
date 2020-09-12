@@ -7,6 +7,7 @@ class DatabaseController:
         self.db = None
         self.cursor = None
         self.db = sqlite3.connect('api_db.sqlite')
+        self.db.row_factory = sqlite3.Row
         self.cursor = self.db.cursor()
 
     def __del__(self):
@@ -14,7 +15,10 @@ class DatabaseController:
 
     def run_query(self, query_string, arguments):
         self.cursor.execute(query_string, arguments)
-        questions_list = self.cursor.fetchall()
-        results = json.dumps(questions_list)
+        query_result = self.cursor.fetchall()
+        rows = []
+        results = {'results': rows}
+        for row in query_result:
+            results['results'].append(dict(row))
 
-        return results
+        return json.dumps(results)

@@ -17,7 +17,8 @@ definitions_parser = ConfigParser()
 definitions_parser.read('definitions.ini')
 
 if not definitions_parser.has_section(function_call):
-    print("NO GO ON THE FUNCTION NAME")
+    print()
+    print('{"error": "No valid function specified"}')
     sys.stdout.flush()
     sys.exit()
 
@@ -25,13 +26,15 @@ function_args = definitions_parser.get(function_call, 'args').split(',')
 function_query = definitions_parser.get(function_call, 'sql')
 
 args_map = {}
-for name in function_args:
-    if name not in args:
-        print("NO GO ON THE ARGS OH!")
-        sys.stdout.flush()
-        sys.exit()
-    else:
-        args_map[name] = form.getvalue(name)
+if function_args[0] != 'None':
+    for name in function_args:
+        if name not in args:
+            print()
+            print('{"error": "Argument mismatch"}')
+            sys.stdout.flush()
+            sys.exit()
+        else:
+            args_map[name] = form.getvalue(name)
 
 
 database_controller = DatabaseController()
