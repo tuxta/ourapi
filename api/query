@@ -39,18 +39,3 @@ results = database_controller.run_query(function_query, args_map)
 
 print()
 print(results)
-print()
-
-print("""
-<html>
-  <head>
-      <title>Our api</title>
-  </head>
-  <body>
-    <p style="font-weight:bold; text-align:center;">
-      Our api - now dynamic :-)
-    </p>
-  </body>
-</html>
-"""
-      )
