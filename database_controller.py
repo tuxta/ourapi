@@ -19,12 +19,16 @@ class DatabaseController:
 
     def run_query(self, query_string, arguments):
 
-        self.cursor.execute(query_string, arguments)
+        try:
+            self.cursor.execute(query_string, arguments)
 
-        query_result = self.cursor.fetchall()
-        rows = []
-        results = {'results': rows}
-        for row in query_result:
-            results['results'].append(dict(row))
+            query_result = self.cursor.fetchall()
+            rows = []
+            results = {'results': rows}
+            for row in query_result:
+                results['results'].append(dict(row))
 
-        return json.dumps(results)
+            return json.dumps(results)
+
+        except sqlite3.OperationalError as e:
+            return "{'sqlerror': '" + e.args[0] + "'}"
