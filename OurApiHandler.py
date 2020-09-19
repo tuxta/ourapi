@@ -1,6 +1,6 @@
 from urllib.parse import urlparse, parse_qsl
 from http.server import BaseHTTPRequestHandler
-from api.database_controller import DatabaseController
+from database_controller import DatabaseController
 import json
 
 
@@ -8,6 +8,7 @@ class OurApiHandler(BaseHTTPRequestHandler):
     request_text_change = None
     client_text_change = None
     response_text_change = None
+    definitions = None
     definitions_dict = {}
     request = ''
     client = ''
@@ -86,6 +87,8 @@ class OurApiHandler(BaseHTTPRequestHandler):
         return False
 
     def request_has_function(self, query_function):
+        self.definitions.load()
+        self.definitions_dict = self.definitions.definitions_dict
         if query_function in self.definitions_dict:
             return True
         else:
@@ -111,8 +114,8 @@ class OurApiHandler(BaseHTTPRequestHandler):
     def _set_path_not_found_response(self):
         self._set_response(404)
 
-    def set_definitions(self, definitions_dict):
-        self.definitions_dict = definitions_dict
+    def set_definitions(self, definitions):
+        self.definitions = definitions
 
     def set_text_signaller(self, signal_function):
         self.request_text_change = signal_function

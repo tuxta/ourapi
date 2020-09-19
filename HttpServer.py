@@ -22,7 +22,8 @@ class HttpServer(QThread):
 
         # setup the http handler
         handler = OurApiHandler
-        handler.set_definitions(handler, definitions_dict=definitions.definitions_dict)
+        # handler.set_definitions(handler, definitions_dict=definitions.definitions_dict)
+        handler.set_definitions(handler, definitions=definitions)
 
         handler.set_text_signaller(handler, signal_function=self.request_text_change)
         handler.set_client_signaller(handler, signal_function=self.client_text_change)

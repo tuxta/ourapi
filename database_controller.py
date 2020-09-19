@@ -1,6 +1,6 @@
 import json
 import sqlite3
-import os
+
 
 class DatabaseController:
     def __init__(self):
