@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>542</height>
+    <width>679</width>
+    <height>590</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,7 +123,7 @@
            <item>
             <layout class="QGridLayout" name="gridLayout">
              <item row="2" column="0">
-              <widget class="QPushButton" name="testClient">
+              <widget class="QPushButton" name="testClientGet">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
@@ -143,7 +143,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Test Client</string>
+                <string>Test Client (GET)</string>
                </property>
               </widget>
              </item>
@@ -198,7 +198,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QPushButton" name="closeButton">
+              <widget class="QPushButton" name="testClientPost">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
@@ -218,7 +218,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Close</string>
+                <string>Test Client (POST)</string>
                </property>
               </widget>
              </item>

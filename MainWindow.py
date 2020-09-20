@@ -19,8 +19,8 @@ class MainWindow(QMainWindow):
 
         self.ui.saveSession.clicked.connect(self.save_session)
         self.ui.resetSession.clicked.connect(self.reset_session)
-        self.ui.testClient.clicked.connect(self.run_test_client)
-        self.ui.closeButton.clicked.connect(self.close_app)
+        self.ui.testClientGet.clicked.connect(self.run_test_client_get)
+        self.ui.testClientPost.clicked.connect(self.run_test_client_post)
 
     def add_to_request(self, request_text):
         request_type, request_string = request_text.split(',')
@@ -38,8 +38,8 @@ class MainWindow(QMainWindow):
     def reset_session(self):
         print("Reset Session")
 
-    def run_test_client(self):
-        print("Run Test Client")
+    def run_test_client_get(self):
+        print("Run Test Client GET")
 
-    def close_app(self):
-        print("Close App")
+    def run_test_client_post(self):
+        print("Run Test Client POST")
