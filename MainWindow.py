@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QMainWindow
 from Ui_MainWindow import Ui_MainWindow
 from HttpServer import HttpServer
 
+from ClientGET import ClientGET
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -39,6 +41,10 @@ class MainWindow(QMainWindow):
         print("Reset Session")
 
     def run_test_client_get(self):
+        get_client = ClientGET(self)
+        get_client.setModal(False)
+        get_client.show()
+
         print("Run Test Client GET")
 
     def run_test_client_post(self):
