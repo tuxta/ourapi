@@ -17,6 +17,11 @@ class MainWindow(QMainWindow):
         self.httpd.response_text_change.connect(self.add_to_response)
         self.httpd.start()
 
+        self.ui.saveSession.clicked.connect(self.save_session)
+        self.ui.resetSession.clicked.connect(self.reset_session)
+        self.ui.testClient.clicked.connect(self.run_test_client)
+        self.ui.closeButton.clicked.connect(self.close_app)
+
     def add_to_request(self, request_text):
         request_type, request_string = request_text.split(',')
         self.ui.requestText.setText(request_string)
@@ -26,3 +31,15 @@ class MainWindow(QMainWindow):
 
     def add_to_response(self, response_text):
         self.ui.responseText.setText(response_text)
+
+    def save_session(self):
+        print("Save Session")
+
+    def reset_session(self):
+        print("Reset Session")
+
+    def run_test_client(self):
+        print("Run Test Client")
+
+    def close_app(self):
+        print("Close App")
