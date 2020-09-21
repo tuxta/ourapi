@@ -45,7 +45,5 @@ class MainWindow(QMainWindow):
         get_client.setModal(False)
         get_client.show()
 
-        print("Run Test Client GET")
-
     def run_test_client_post(self):
         print("Run Test Client POST")

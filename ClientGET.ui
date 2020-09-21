@@ -153,7 +153,13 @@
         </layout>
        </item>
        <item>
-        <widget class="QTreeView" name="results"/>
+        <widget class="QTreeWidget" name="results">
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </item>

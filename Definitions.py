@@ -8,7 +8,6 @@ class Definitions:
 
     def load(self):
         self.definitions_dict = {}
-        print('Loading definitions file: ' + self.definitions_file)
         with open(self.definitions_file) as file:
             parser = ConfigParser()
             parser.read_file(file)
