@@ -68,7 +68,14 @@ class ClientGET(QDialog):
             'http://127.0.0.1:8000' + self.url,
             params=self.variables
         )
-        json_dict = return_data.json()
+
+        # if the return_data structure status is not 200, then something went wrong
+        if return_data.status_code > 200:
+            # make a simple error dictionary to pass to the build_tree function
+            json_dict = {'Error': {'Code': return_data.status_code, 'Message': return_data.content}}
+        else:
+            json_dict = return_data.json()
+
         self.ui.results.clear()
         self.build_tree(self.ui.results.invisibleRootItem(), json_dict)
 
