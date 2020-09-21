@@ -1,3 +1,4 @@
+import json
 import requests
 from Ui_ClientGET import Ui_ClientGET
 from PyQt5.QtWidgets import QDialog, QTreeWidgetItem
@@ -72,7 +73,7 @@ class ClientGET(QDialog):
         # if the return_data structure status is not 200, then something went wrong
         if return_data.status_code > 200:
             # make a simple error dictionary to pass to the build_tree function
-            json_dict = {'Error': {'Code': return_data.status_code, 'Message': return_data.content}}
+            json_dict = {'Error': {'Code': return_data.status_code, 'Message': return_data.content.decode('ascii')}}
         else:
             json_dict = return_data.json()
 
