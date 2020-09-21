@@ -21,7 +21,9 @@ class OurApiHandler(BaseHTTPRequestHandler):
         query_function = self.trim_path(urlparse(self.path).path)
 
         # if query_function returns False the API path could not be found
-        if not query_function:
+        # check the query_function is not an empty string because they are false...
+        # handle the empty string in the appropriate place
+        if isinstance(query_function, bool) and not query_function:
             return
 
         # split all parameters into a dictionary
@@ -55,11 +57,12 @@ class OurApiHandler(BaseHTTPRequestHandler):
 
     def trim_path(self, path):
         if path.find('/api/', 0, len(path)) >= 0:
-            return path.replace('/api/', '')
-        else:
-            result_json = 'Supplied path not found: ' + path
-            self._set_path_not_found_response()
-            self.wfile.write(result_json.encode('utf-8'))
+            path = path.replace('/api/', '')
+            return path
+
+        result_json = 'Supplied path not found: "' + path + '"'
+        self._set_path_not_found_response()
+        self.wfile.write(result_json.encode('utf-8'))
 
         return False
 
