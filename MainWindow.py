@@ -2,7 +2,8 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from Ui_MainWindow import Ui_MainWindow
 from HttpServer import HttpServer
 
-from ClientGET import ClientGET
+from ClientGet import ClientGet
+from ClientPost import ClientPost
 
 
 class MainWindow(QMainWindow):
@@ -64,11 +65,11 @@ class MainWindow(QMainWindow):
         self.ui.responseText.clear()
 
     def run_test_client_get(self):
-        get_client = ClientGET(self)
+        get_client = ClientGet(self)
         get_client.setModal(False)
         get_client.show()
 
     def run_test_client_post(self):
-        get_client = ClientGET(self)
-        get_client.setModal(False)
-        get_client.show()
+        post_client = ClientPost(self)
+        post_client.setModal(False)
+        post_client.show()
