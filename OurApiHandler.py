@@ -42,16 +42,15 @@ class OurApiHandler(BaseHTTPRequestHandler):
                 self._set_response(200)
                 self.wfile.write(result_json.encode('utf-8'))
 
-                if self.path[-3:] != 'ico':
-                    self.request_text_change.emit(self.command
-                                                  + ","
-                                                  + self.path)
-                    client_address, client_port = self.client_address
-                    self.client_text_change.emit("Client IP Address "
-                                                 + str(client_address)
-                                                 + " and port "
-                                                 + str(client_port))
-                    self.response_text_change.emit(self.body)
+                self.request_text_change.emit(self.command
+                                              + ","
+                                              + self.path)
+                client_address, client_port = self.client_address
+                self.client_text_change.emit("Client IP Address "
+                                             + str(client_address)
+                                             + " and port "
+                                             + str(client_port))
+                self.response_text_change.emit(self.body)
 
         return
 
