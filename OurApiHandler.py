@@ -2,8 +2,7 @@ import json
 from urllib.parse import urlparse, parse_qsl
 from http.server import BaseHTTPRequestHandler
 from database_controller import DatabaseController
-from cgi import parse_header, parse_multipart
-from urllib.parse import parse_qs
+import cgi
 
 
 class OurApiHandler(BaseHTTPRequestHandler):
@@ -65,6 +64,14 @@ class OurApiHandler(BaseHTTPRequestHandler):
         # #### Need to grab the POST variables #### #
         # #### Should be good once that works  #### #
         # ######################################### #
+
+        form = cgi.FieldStorage(
+            fp=self.rfile,
+            headers=self.headers,
+            environ={'REQUEST_METHOD': 'POST'}
+        )
+        for key in form.keys():
+            query_args[key] = form[key].value
 
         self.handle_new_request(query_function, query_args)
 
