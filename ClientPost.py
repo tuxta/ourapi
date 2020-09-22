@@ -13,6 +13,7 @@ class ClientPost(Client):
         self.ui.urlText.setText(self.url)
 
     def run(self):
+        print(f"Client variables : {self.variables}")
         self.return_data = requests.post(
             'http://127.0.0.1:8000' + self.url,
             data=self.variables

@@ -2,6 +2,8 @@ import json
 from urllib.parse import urlparse, parse_qsl
 from http.server import BaseHTTPRequestHandler
 from database_controller import DatabaseController
+from cgi import parse_header, parse_multipart
+from urllib.parse import parse_qs
 
 
 class OurApiHandler(BaseHTTPRequestHandler):
@@ -14,9 +16,62 @@ class OurApiHandler(BaseHTTPRequestHandler):
     client = ''
     body = ''
 
-    def do_GET(self):
-        result_json = ''
+    def handle_new_request(self, query_function, query_args):
+        # check query_function is a key in the definitions_dict
+        if self.request_has_function(query_function):
 
+            if not self.request_query_has_errors(query_function, query_args):
+                db = DatabaseController()
+                sql = self.definitions_dict[query_function]['sql']
+
+                # run the query on the DB
+                self.body = db.run_query(sql, query_args)
+
+                self._set_response(200)
+                self.wfile.write(self.body.encode('utf-8'))
+
+                self.request_text_change.emit(self.command
+                                              + ","
+                                              + self.path)
+                client_address, client_port = self.client_address
+                client_text_string = "Request type : GET\n" \
+                                     + "\nIP Address : " \
+                                     + str(client_address) \
+                                     + "\n\nPort : " \
+                                     + str(client_port) \
+                                     + "\n\nVariables : \n"
+
+                for key, val in query_args.items():
+                    client_text_string += f"{key} : {val}\n"
+
+                self.client_text_change.emit(client_text_string)
+
+                self.response_text_change.emit(self.body)
+
+    def do_POST(self):
+        # check the path is correct
+        query_function = self.trim_path(urlparse(self.path).path)
+
+        # if query_function returns False the API path could not be found
+        # check the query_function is not an empty string because they are false...
+        # handle the empty string in the appropriate place
+        if isinstance(query_function, bool) and not query_function:
+            return
+
+        # Read Post variables
+        query_args = {}
+
+        # ######################################### #
+        # #### Need to grab the POST variables #### #
+        # #### Should be good once that works  #### #
+        # ######################################### #
+
+        self.handle_new_request(query_function, query_args)
+
+        return
+
+
+    def do_GET(self):
         # check the path is correct
         query_function = self.trim_path(urlparse(self.path).path)
 
@@ -29,38 +84,10 @@ class OurApiHandler(BaseHTTPRequestHandler):
         # split all parameters into a dictionary
         query_args = dict(parse_qsl(urlparse(self.path).query))
 
-        # check query_function is a key in the definitions_dict
-        if self.request_has_function(query_function):
-
-            if not self.request_query_has_errors(query_function, query_args):
-                db = DatabaseController()
-                sql = self.definitions_dict[query_function]['sql']
-
-                # run the query on the DB
-                self.body = result_json = db.run_query(sql, query_args)
-
-                self._set_response(200)
-                self.wfile.write(result_json.encode('utf-8'))
-
-                self.request_text_change.emit(self.command
-                                              + ","
-                                              + self.path)
-                client_address, client_port = self.client_address
-                client_text_string = "Request type : GET\n" \
-                                     + "\nIP Address : " \
-                                     + str(client_address)\
-                                     + "\n\nPort : "\
-                                     + str(client_port) \
-                                     + "\n\nVariables : \n"
-
-                for key, val in query_args.items():
-                    client_text_string += f"{key} : {val}\n"
-
-                self.client_text_change.emit(client_text_string)
-
-                self.response_text_change.emit(self.body)
+        self.handle_new_request(query_function, query_args)
 
         return
+
 
     def trim_path(self, path):
         if path.find('/api/', 0, len(path)) >= 0:
