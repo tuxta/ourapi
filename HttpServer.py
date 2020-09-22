@@ -1,8 +1,8 @@
+import os
 from http.server import HTTPServer
 from Definitions import Definitions
 from OurApiHandler import OurApiHandler
 from PyQt5.QtCore import QThread, pyqtSignal
-import os
 
 
 class HttpServer(QThread):
@@ -31,5 +31,5 @@ class HttpServer(QThread):
 
         # start http server
         httpd = HTTPServer(server_address, handler)
-        print("serving at port", 8000)
+        print("Serving on port", 8000)
         httpd.serve_forever()

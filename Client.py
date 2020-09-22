@@ -1,4 +1,4 @@
-from Ui_Client import Ui_ClientGET
+from Ui_Client import Ui_Client
 from PyQt5.QtWidgets import QDialog, QTreeWidgetItem
 from InputDialogs import VariableInputDialog, FunctionInputDialog
 
@@ -8,7 +8,7 @@ class Client(QDialog):
         super(QDialog, self).__init__(parent)
 
         self.setModal(False)
-        self.ui = Ui_ClientGET()
+        self.ui = Ui_Client()
         self.ui.setupUi(self)
 
         self.ui.functionButton.clicked.connect(self.set_function)

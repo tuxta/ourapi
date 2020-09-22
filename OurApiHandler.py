@@ -1,8 +1,8 @@
+import cgi
 import json
 from urllib.parse import urlparse, parse_qsl
 from http.server import BaseHTTPRequestHandler
 from database_controller import DatabaseController
-import cgi
 
 
 class OurApiHandler(BaseHTTPRequestHandler):
@@ -60,11 +60,6 @@ class OurApiHandler(BaseHTTPRequestHandler):
 
         # Read Post variables
         query_args = {}
-
-        # ######################################### #
-        # #### Need to grab the POST variables #### #
-        # #### Should be good once that works  #### #
-        # ######################################### #
 
         form = cgi.FieldStorage(
             fp=self.rfile,
