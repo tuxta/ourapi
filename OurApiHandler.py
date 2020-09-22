@@ -15,7 +15,7 @@ class OurApiHandler(BaseHTTPRequestHandler):
     client = ''
     body = ''
 
-    def handle_new_request(self, query_function, query_args):
+    def handle_new_request(self, query_function, query_args, request_type):
         # check query_function is a key in the definitions_dict
         if self.request_has_function(query_function):
 
@@ -33,7 +33,8 @@ class OurApiHandler(BaseHTTPRequestHandler):
                                               + ","
                                               + self.path)
                 client_address, client_port = self.client_address
-                client_text_string = "Request type : GET\n" \
+                client_text_string = "Request type : " \
+                                     + request_type + "\n" \
                                      + "\nIP Address : " \
                                      + str(client_address) \
                                      + "\n\nPort : " \
@@ -73,7 +74,7 @@ class OurApiHandler(BaseHTTPRequestHandler):
         for key in form.keys():
             query_args[key] = form[key].value
 
-        self.handle_new_request(query_function, query_args)
+        self.handle_new_request(query_function, query_args, 'POST')
 
         return
 
@@ -91,7 +92,7 @@ class OurApiHandler(BaseHTTPRequestHandler):
         # split all parameters into a dictionary
         query_args = dict(parse_qsl(urlparse(self.path).query))
 
-        self.handle_new_request(query_function, query_args)
+        self.handle_new_request(query_function, query_args, "GET")
 
         return
 
