@@ -1,7 +1,7 @@
+import json
 from urllib.parse import urlparse, parse_qsl
 from http.server import BaseHTTPRequestHandler
 from database_controller import DatabaseController
-import json
 
 
 class OurApiHandler(BaseHTTPRequestHandler):
@@ -46,10 +46,18 @@ class OurApiHandler(BaseHTTPRequestHandler):
                                               + ","
                                               + self.path)
                 client_address, client_port = self.client_address
-                self.client_text_change.emit("Client IP Address "
-                                             + str(client_address)
-                                             + " and port "
-                                             + str(client_port))
+                client_text_string = "Request type : GET\n" \
+                                     + "\nIP Address : " \
+                                     + str(client_address)\
+                                     + "\n\nPort : "\
+                                     + str(client_port) \
+                                     + "\n\nVariables : \n"
+
+                for key, val in query_args.items():
+                    client_text_string += f"{key} : {val}\n"
+
+                self.client_text_change.emit(client_text_string)
+
                 self.response_text_change.emit(self.body)
 
         return

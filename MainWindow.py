@@ -26,6 +26,10 @@ class MainWindow(QMainWindow):
 
         self.session_string = ''
 
+        self.ui.requestText.setReadOnly(True)
+        self.ui.clientText.setReadOnly(True)
+        self.ui.responseText.setReadOnly(True)
+
     def add_to_request(self, request_text):
         request_type, request_string = request_text.split(',')
         self.ui.requestText.setText(request_string)
@@ -38,7 +42,6 @@ class MainWindow(QMainWindow):
         self.session_string += request_log
 
     def add_to_client(self, client_text):
-        print("Add to client")
         self.ui.clientText.setText(client_text)
         request_log = f"Client details\n{client_text}\n"
         self.session_string += request_log

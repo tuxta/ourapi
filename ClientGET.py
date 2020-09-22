@@ -55,19 +55,19 @@ class ClientGET(QDialog):
         self.ui.variablesText.setPlainText('')
 
     def rebuild_url(self):
-        self.url = f'/api/{self.function}'
+        self.url = '/api/'
+        if len(self.function) > 0:
+            self.url += self.function
         if len(self.variables) > 0:
             self.url = self.url + '?'
             for var in self.variables.items():
                 self.url = self.url + f"{var[0]}={var[1]}&"
-                print(self.url)
             self.url = self.url[:-1]
         self.ui.urlText.setText(self.url)
 
     def run(self):
         return_data = requests.get(
-            'http://127.0.0.1:8000' + self.url,
-            params=self.variables
+            'http://127.0.0.1:8000' + self.url
         )
 
         # if the return_data structure status is not 200, then something went wrong
