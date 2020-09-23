@@ -15,7 +15,8 @@ class HttpServer(QThread):
         print(os.path.dirname(__file__))
 
         # define server values
-        server_address = ('localhost', 8000)
+        # server_address = ('localhost', 8000)
+        server_address = ('0.0.0.0', 8000)
 
         # load the definitions file into object
         definitions = Definitions('definitions.ini')
