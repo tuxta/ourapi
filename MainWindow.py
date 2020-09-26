@@ -81,4 +81,6 @@ class MainWindow(QMainWindow):
         definitions = Definitions('definitions.ini')
         definitions.load()
         api_dialog = ApiDialog(self, definitions.definitions_dict)
-        api_dialog.exec()
+        api_dialog.setWindowTitle('API Functions')
+        api_dialog.setModal(False)
+        api_dialog.show()
