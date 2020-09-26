@@ -2,8 +2,10 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from Ui_MainWindow import Ui_MainWindow
 from HttpServer import HttpServer
 
+from ApiDialog import ApiDialog
 from ClientGet import ClientGet
 from ClientPost import ClientPost
+from Definitions import Definitions
 
 
 class MainWindow(QMainWindow):
@@ -24,6 +26,7 @@ class MainWindow(QMainWindow):
         self.ui.resetSession.clicked.connect(self.reset_session)
         self.ui.testClientGet.clicked.connect(self.run_test_client_get)
         self.ui.testClientPost.clicked.connect(self.run_test_client_post)
+        self.ui.apiSummary.clicked.connect(self.show_api)
 
         self.session_string = ''
 
@@ -73,3 +76,9 @@ class MainWindow(QMainWindow):
         post_client = ClientPost(self)
         post_client.setModal(False)
         post_client.show()
+
+    def show_api(self):
+        definitions = Definitions('definitions.ini')
+        definitions.load()
+        api_dialog = ApiDialog(self, definitions.definitions_dict)
+        api_dialog.exec()

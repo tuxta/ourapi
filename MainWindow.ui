@@ -128,8 +128,8 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="2" column="0">
-              <widget class="QPushButton" name="testClientGet">
+             <item row="0" column="1">
+              <widget class="QPushButton" name="resetSession">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
@@ -149,7 +149,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Test Client (GET)</string>
+                <string>Reset Session</string>
                </property>
               </widget>
              </item>
@@ -178,8 +178,8 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="resetSession">
+             <item row="2" column="0">
+              <widget class="QPushButton" name="testClientGet">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                  <horstretch>0</horstretch>
@@ -199,7 +199,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Reset Session</string>
+                <string>Test Client (GET)</string>
                </property>
               </widget>
              </item>
@@ -225,6 +225,31 @@
                </property>
                <property name="text">
                 <string>Test Client (POST)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QPushButton" name="apiSummary">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>100</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>API Summary</string>
                </property>
               </widget>
              </item>
