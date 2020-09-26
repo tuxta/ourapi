@@ -25,9 +25,9 @@ class Client(QDialog):
         self.ui.variablesText.setReadOnly(True)
 
     def set_function(self):
-        self.function = 'country_info'
         function_dialog = FunctionInputDialog(self)
         if function_dialog.exec():
+            self.reset()
             self.function = function_dialog.get_entry()
             self.ui.functionText.setPlainText(self.function)
             self.rebuild_url()
@@ -43,7 +43,7 @@ class Client(QDialog):
 
     def reset(self):
         self.function = ''
-        self.variables = []
+        self.variables = {}
         self.url = ''
         self.ui.results.clear()
         self.ui.urlText.setText('/api/')
