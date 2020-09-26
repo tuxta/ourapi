@@ -127,6 +127,7 @@ class Ui_Client(object):
         self.results = QtWidgets.QTreeWidget(Client)
         self.results.setObjectName("results")
         self.results.headerItem().setText(0, "1")
+        self.results.header().setVisible(False)
         self.horizontalLayout_3.addWidget(self.results)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
 

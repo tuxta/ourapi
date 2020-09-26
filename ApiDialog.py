@@ -55,7 +55,7 @@ class ApiDialog(QDialog):
             route_node.setExpanded(False)
 
             route_str = QTreeWidgetItem()
-            route_list_str = 'http://0.0.0.0:8000/api/' + str(key)
+            route_list_str = 'http://127.0.0.1:8000/api/' + str(key)
             if tmp_args:
                 route_list_str += '?' + urlencode(tmp_args)
 
